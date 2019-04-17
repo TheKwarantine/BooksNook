@@ -1,3 +1,8 @@
+body {
+    background:url(./bg_bubbles.jpg);
+    background-size: cover;
+    }
+
 nav .navbar-brand
 {
     /* size for brand */

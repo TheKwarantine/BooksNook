@@ -109,6 +109,11 @@ def buy():
         balance = usd(dbQuery[0]["cash"])
         return render_template("buy.html", balance=balance)
 
+@app.route("/bio", methods=["GET"])
+@login_required
+def bio():
+    return render_template("bio.html")
+
 @app.route("/calendar", methods=["GET"])
 @login_required
 def calendar():
