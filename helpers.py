@@ -1,6 +1,3 @@
-import requests
-import urllib.parse
-
 from flask import redirect, render_template, request, session
 from functools import wraps
 
@@ -32,32 +29,3 @@ def login_required(f):
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
-
-
-def usd(value):
-    """Format value as USD."""
-    return f"${value:,.2f}"
-
-
-def lookup(symbol):
-    """ Look up quote for symbol. // removed {urllib.parse.quote_plus(symbol)}  """
-
-    # Contact API
-    try:
-        response = requests.get(f"https://api.iextrading.com/1.0/stock/{symbol}/quote")
-        response.raise_for_status()
-    except requests.RequestException:
-        return None
-
-    # Parse response
-    try:
-        quote = response.json()
-        return {
-            "name": quote["companyName"],
-            "price": quote["latestPrice"],
-            "symbol": quote["symbol"],
-            "52whigh": usd(quote["week52High"]),
-            "52wlow": usd(quote["week52Low"])
-        }
-    except (KeyError, TypeError, ValueError):
-        return None

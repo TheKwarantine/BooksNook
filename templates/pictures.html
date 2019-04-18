@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<link href="https://unpkg.com/nanogallery2@2.4.1/dist/css/nanogallery2.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://unpkg.com/nanogallery2@2.4.1/dist/jquery.nanogallery2.min.js"></script>
+<style>
+body {
+    background:url(./);
+    background-color: lightgrey
+}
+</style>
+{% endblock %}
+
+{% block title %}
+  Pictures
+{% endblock %}
+
+{% block main %}
+
+<div ID="ngy2p" data-nanogallery2='{
+    "itemsBaseURL": ".",
+    "thumbnailWidth": "300",
+    "thumbnailHeight": "auto",
+    "thumbnailBorderVertical": 0,
+    "thumbnailBorderHorizontal": 0,
+    "colorScheme": {
+      "thumbnail": {
+        "background": "rgba(255,255,255,0)"
+      }
+    },
+    "thumbnailLabel": {
+      "display": false
+    },
+    "thumbnailHoverEffect2": "imageScale150Outside",
+    "thumbnailAlignment": "center",
+    "thumbnailGutterWidth": 4,
+    "thumbnailGutterHeight": 4
+  }'>
+  <a href="/static/images/image1.jpg" data-ngthumb="/static/images/image1t.jpg" data-ngdesc="">Noah and Hayze Swings</a>
+  <a href="/static/images/image2.jpg" data-ngthumb="/static/images/image2t.jpg" data-ngdesc="">Zoe and Grey Outside</a>
+  <a href="/static/images/image3.jpg" data-ngthumb="/static/images/image3t.jpg" data-ngdesc="">The Whole Gang - Out for a Walk</a>
+  <a href="/static/images/image4.jpg" data-ngthumb="/static/images/image4t.jpg" data-ngdesc="">Skylar Painting</a>
+  <a href="/static/images/image5.jpg" data-ngthumb="/static/images/image5t.jpg" data-ngdesc="">Cameron Painting</a>
+  <a href="/static/images/image1.jpg" data-ngthumb="/static/images/image1t.jpg" data-ngdesc="">Noah and Hayze Swings</a>
+  <a href="/static/images/image2.jpg" data-ngthumb="/static/images/image2t.jpg" data-ngdesc="">Zoe and Grey Outside</a>
+  <a href="/static/images/image3.jpg" data-ngthumb="/static/images/image3t.jpg" data-ngdesc="">The Whole Gang - Out for a Walk</a>
+  <a href="/static/images/image4.jpg" data-ngthumb="/static/images/image4t.jpg" data-ngdesc="">Skylar Painting</a>
+  <a href="/static/images/image5.jpg" data-ngthumb="/static/images/image5t.jpg" data-ngdesc="">Cameron Painting</a>
+  <a href="/static/images/image1.jpg" data-ngthumb="/static/images/image1t.jpg" data-ngdesc="">Noah and Hayze Swings</a>
+  <a href="/static/images/image2.jpg" data-ngthumb="/static/images/image2t.jpg" data-ngdesc="">Zoe and Grey Outside</a>
+  <a href="/static/images/image3.jpg" data-ngthumb="/static/images/image3t.jpg" data-ngdesc="">The Whole Gang - Out for a Walk</a>
+  <a href="/static/images/image4.jpg" data-ngthumb="/static/images/image4t.jpg" data-ngdesc="">Skylar Painting</a>
+  <a href="/static/images/image5.jpg" data-ngthumb="/static/images/image5t.jpg" data-ngdesc="">Cameron Painting</a>
+</div>
+
+{% endblock %}
