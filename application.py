@@ -46,6 +46,7 @@ def index():
 @app.route("/bio", methods=["GET"])
 @login_required
 def bio():
+    """Biography Page"""
     bio = db.execute("SELECT * FROM bio")
     return render_template("bio.html", bio=bio)
 
@@ -53,6 +54,7 @@ def bio():
 @app.route("/calendar", methods=["GET"])
 @login_required
 def calendar():
+    """Calendar Page"""
     return render_template("calendar.html")
 
 
@@ -150,9 +152,10 @@ def payment():
 @app.route("/pictures", methods=["GET"])
 @login_required
 def pictures():
+    """Page for Daycare Pictures"""
     return render_template("pictures.html")
 
-
+"""
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # Verify user reached by POST or GET
@@ -198,7 +201,7 @@ def register():
     # If user requested via GET, send them form to register
     else:
         return render_template("register.html")
-
+"""
 
 def errorhandler(e):
     """Handle error"""

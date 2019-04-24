@@ -1,6 +1,9 @@
 body {
     background:url(./bg_bubbles.jpg);
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding-top: 70px;
     }
 
 nav .navbar-brand
