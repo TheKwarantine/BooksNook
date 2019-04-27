@@ -139,14 +139,11 @@ def password():
         return render_template("password.html")
 
 
-@app.route("/payment", methods=["GET", "POST"])
+@app.route("/payment", methods=["GET"])
 @login_required
 def payment():
     """Childcare Payments"""
-    if request.method == "POST":
-        return redirect("/")
-    else:
-        return render_template("deposit.html")
+    return render_template("payment.html")
 
 
 @app.route("/pictures", methods=["GET"])
@@ -155,7 +152,7 @@ def pictures():
     """Page for Daycare Pictures"""
     return render_template("pictures.html")
 
-"""
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     # Verify user reached by POST or GET
@@ -201,7 +198,7 @@ def register():
     # If user requested via GET, send them form to register
     else:
         return render_template("register.html")
-"""
+
 
 def errorhandler(e):
     """Handle error"""

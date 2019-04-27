@@ -6,11 +6,60 @@
 
 {% block main %}
 
-    <form action="/deposit" method="post" id="deposit">
+<div class="container-fluid">
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <div class="form-group">
-            <input class="form-control" name="deposit" placeholder="Amount to Deposit" type="number">
+            <input type="hidden" name="cmd" value="_xclick-subscriptions">
+            <input type="hidden" name="business" value="braebookster@gmail.com">
+            <input type="hidden" name="lc" value="US">
+            <input type="hidden" name="no_note" value="1">
+            <input type="hidden" name="src" value="1">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="bn" value="PP-SubscriptionsBF:btn_subscribe_LG.gif:NonHostedGuest">
+            
+            <table class="table-borderless" align="center">
+                <tr>
+                    <td>
+                        <input type="hidden" name="on0" value="Payment Options">Payment Options
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <select name="os0">
+                            <option value="Full Time Childcare">Full Time Childcare : $125.00 USD - weekly</option>
+                            <option value="Part Time Childcare">Part Time Childcare : $80.00 USD - weekly</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <br />
+                        <input type="hidden" name="on1" value="Child's Name">Child's Name
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" name="os1" maxlength="200">
+                    </td>
+                </tr>
+            </table>
+
+            <br />
+
+            <input type="hidden" name="option_select0" value="Full Time Childcare">
+            <input type="hidden" name="option_amount0" value="125.00">
+            <input type="hidden" name="option_period0" value="W">
+            <input type="hidden" name="option_frequency0" value="1">
+            <input type="hidden" name="option_select1" value="Part Time Childcare">
+            <input type="hidden" name="option_amount1" value="80.00">
+            <input type="hidden" name="option_period1" value="W">
+            <input type="hidden" name="option_frequency1" value="1">
+            <input type="hidden" name="option_index" value="0">
+
+            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
         </div>
-        <button class="btn btn-primary" id="Submit" type="submit">Deposit</button>
     </form>
+</div>
 
 {% endblock %}
