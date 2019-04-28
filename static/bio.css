@@ -1,8 +1,5 @@
-/* FontAwesome for working BootSnippet :> */
-
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-#team {
-}
+
 
 .btn-primary:hover,
 .btn-primary:focus {
@@ -24,7 +21,7 @@ section {
 
 section .section-title {
     text-align: center;
-    color: #fff;
+    color: blue;
     margin-bottom: 50px;
     text-transform: uppercase;
 }
