@@ -1,6 +1,7 @@
 import os
 import psycopg2
 
+from cs50 import SQL
 from flask import Flask, flash, jsonify, redirect, render_template, request, session
 from flask_session import Session
 from tempfile import mkdtemp
@@ -32,12 +33,12 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+# Configure CS50 Library to use SQLite database
+db = SQL("sqlite:///booksnook.db")
 
 # Configure connection to Heroku Postgre database
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-db = conn.cursor()
-
 
 @app.route("/")
 @login_required
@@ -50,8 +51,7 @@ def index():
 @login_required
 def bio():
     """Biography Page"""
-    db.execute("""SELECT * FROM bio""")
-    bio = db.fetchall()
+    bio = db.execute("SELECT * FROM bio")
     return render_template("bio.html", bio=bio)
 
 
@@ -68,8 +68,7 @@ def check():
     username = request.args.get("username")
 
     # Checks server for if the username exists
-    db.execute("""SELECT * FROM users WHERE EXISTS (SELECT * FROM users WHERE username = :username)""", username=username)
-    result = db.fetchall()
+    result = db.execute("SELECT * FROM users WHERE EXISTS (SELECT * FROM users WHERE username = :username)", username=username)
 
     # Returns via JSON whether name is available or not    
     if not result and len(username) > 0:
@@ -97,8 +96,8 @@ def login():
             return apology("must provide password", 403)
 
         # Query database for username
-        db.execute("""SELECT * FROM users WHERE username = :username""", username=request.form.get("username"))
-        rows = db.fetchall()
+        rows = db.execute("SELECT * FROM users WHERE username = :username",
+                          username=request.form.get("username"))
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
@@ -147,13 +146,12 @@ def password():
         if not request.form.get("newPassword") == request.form.get("confirmation"):
             return apology("New Passwords Don't Match", 403)
 
-        db.execute("""SELECT * FROM users WHERE id = :sid""", sid=session["user_id"])
-        details = db.fetchall()
+        details = db.execute("SELECT * FROM users WHERE id = :sid", sid=session["user_id"])
 
         # Checks if old password matches and if it does, updates to new password
         if check_password_hash(details[0]["hash"], request.form.get("oldPassword")):
             hsp = generate_password_hash(request.form.get("newPassword"), method='pbkdf2:sha256', salt_length=8)
-            db.execute("""UPDATE users SET hash = :hash WHERE id = :sid""", hash=hsp, sid=session["user_id"])
+            db.execute("UPDATE users SET hash = :hash WHERE id = :sid", hash=hsp, sid=session["user_id"])
             flash("Password Updated")
             return redirect("/")
     else:
@@ -192,20 +190,18 @@ def register():
             return apology("Pazzword No Match", 400)
 
         # Check if Username is taken
-        db.execute("""SELECT * FROM users WHERE EXISTS (SELECT * FROM users WHERE username = :username)""",
+        result = db.execute("SELECT * FROM users WHERE EXISTS (SELECT * FROM users WHERE username = :username)",
                             username=request.form.get("username"))
-        result = db.fetchall()
 
         if not result and len(request.form.get("username")) > 0:
 
             # If user name is long enough and exists, Hash Password and register user database
             hsp = generate_password_hash(request.form.get("password"), method='pbkdf2:sha256', salt_length=8)
             usn = request.form.get("username")
-            db.execute("""INSERT INTO users (username, hash) VALUES(:username, :hash)""", username=usn, hash=hsp)
+            db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)", username=usn, hash=hsp)
 
             # Check database for existence
-            db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
-            rows = db.fetchall()
+            rows = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
 
             # Setup session ID for user
             session["user_id"] = rows[0]["id"]
