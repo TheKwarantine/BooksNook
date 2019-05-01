@@ -58,6 +58,21 @@ def calendar():
     return render_template("calendar.html")
 
 
+@app.route("/check", methods=["GET"])
+def check():
+    """Return true if username available, else false, in JSON format"""
+    username = request.args.get("username")
+
+    # Checks server for if the username exists
+    result = db.execute("SELECT * FROM users WHERE EXISTS (SELECT * FROM users WHERE username = :username)", username=username)
+
+    # Returns via JSON whether name is available or not    
+    if not result and len(username) > 0:
+        return jsonify(True)
+    else:
+        return jsonify(False)
+
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""

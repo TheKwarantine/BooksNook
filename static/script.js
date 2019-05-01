@@ -9,7 +9,7 @@ function ajaxCheck() {
         type: "GET",
 
         success:function(data){
-            if (data === "false") {
+            if (data === false) {
                 return false;
             } else {
                 form.submit();
@@ -36,7 +36,7 @@ function liveCheck() {
         type: "GET",
 
         success:function(data){
-            if (data === "false") {
+            if (data === false) {
                 failure.style.display = "block";
                 success.style.display = "none";
                 return false;

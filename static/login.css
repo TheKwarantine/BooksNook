@@ -1,5 +1,4 @@
 /* Bootstrap - Bootsnipp "Elegant Login Image by SamimOnline -- Edited by Myself to theme */
-/* Made with love by Mutiullah Samim*/
 
 html,body{
 background-image: url('http://getwallpapers.com/wallpaper/full/8/7/9/606345.jpg');
@@ -14,7 +13,7 @@ align-content: center;
 }
 
 .card{
-height: 300px;
+height: 375px;
 margin-top: auto;
 margin-bottom: auto;
 width: 400px;
